@@ -3,20 +3,20 @@ class Solution {
         
         int trappedWater=0;
         int n=height.length; 
-        int leftmax[]=new int[n];
-        leftmax[0]=height[0];
-        for(int i=1;i<n;i++){
-            leftmax[i]=Math.max(height[i],leftmax[i-1]);
+        int rightmax=0;
+        int leftmax=0;
+        int i=0;
+        int j=n-1;
+        while(i<=j){
+         rightmax=Math.max(rightmax,height[j]);
+         leftmax=Math.max(leftmax,height[i]);
+         if(rightmax>leftmax){
+            trappedWater+=leftmax-height[i++];
+    
+         }else{
+            trappedWater+=rightmax-height[j--];
+         }
         }
-         int rightmax[]=new int[n];
-         rightmax[n-1]=height[n-1];
-         for(int i=n-2;i>=0;i--){
-            rightmax[i]=Math.max(height[i],rightmax[i+1]);
-         }
-         for(int i=0;i<n;i++){
-          int trapwater=Math.min(rightmax[i],leftmax[i]);
-          trappedWater+=trapwater-height[i];
-         }
          return trappedWater;
     }
 }
