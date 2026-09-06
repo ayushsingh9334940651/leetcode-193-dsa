@@ -1,25 +1,26 @@
 class Solution {
     public int minimumDistance(int[] nums) {
         if(nums.length<3) return -1;
-        int max=Integer.MAX_VALUE;
-     HashMap<Integer,Integer> map=new HashMap<>();
-     for(int ele:nums){
+        int ans=Integer.MAX_VALUE;
+     HashMap<Integer,List<Integer>> map=new HashMap<>();
+     for(int i=0;i<nums.length;i++){
+        int ele=nums[i];
         if(map.containsKey(ele)){
-            int fre=map.get(ele);
-            map.put(ele,fre+1);
-            if(map.get(ele)==3){
-             ArrayList<Integer> arr=new ArrayList<>();
-             for(int i=0;i<nums.length;i++){
-                if(nums[i]==ele) arr.add(i);
+            map.get(ele).add(i); 
+             if(map.get(ele).size()>=3){
+                int last=map.get(ele).get(map.get(ele).size()-1);
+                int first=map.get(ele).get(map.get(ele).size()-3);
+                ans=Math.min(ans,2*(last-first));
              }
-             for(int j=0;j<arr.size()-2;j++){
-                int sum=Math.abs(arr.get(j)-arr.get(j+1))+Math.abs(arr.get(j+1)-arr.get(j+2))+Math.abs(arr.get(j+2)-arr.get(j));
-                max=Math.min(max,sum);
-             }
-            }
-        }else map.put(ele,1);
-     }
-     if(max==Integer.MAX_VALUE) return -1;
-     return max;
+             
+        }  
+       else{
+         map.put(ele,new ArrayList<>());
+         map.get(ele).add(i);
+
+       } 
+    }
+     if(ans==Integer.MAX_VALUE) return -1;
+     return ans;
     }
 }
