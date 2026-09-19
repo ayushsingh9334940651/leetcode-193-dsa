@@ -1,28 +1,11 @@
 
 class Solution {
     public boolean isValidBST(TreeNode root) {
-      TreeNode curr=root;
-      long prev=Long.MIN_VALUE;
-      while(curr!=null){
-        if(curr.left!=null ){
-            TreeNode pred=curr.left;
-            while(pred.right!=null && pred.right!=curr ) pred=pred.right;
-             if(pred.right==null){
-                pred.right=curr;
-                curr=curr.left;
-            }
-            else{
-                pred.right=null;
-                if(prev>=curr.val)  return false;
-                 prev=curr.val;
-                curr=curr.right;
-            }
-        }else{
-            if(prev>=curr.val)  return false;
-             prev=curr.val;
-            curr=curr.right;
-        }
-      }
-    return true;
+      return validBst(root,Long.MIN_VALUE,Long.MAX_VALUE);
+    }
+    private boolean validBst(TreeNode root,long min,long max){
+        if(root==null) return true;
+        if(root.val>=max || root.val<=min) return false;
+        return validBst(root.left,min,root.val) && validBst(root.right,root.val,max);
     }
 }
