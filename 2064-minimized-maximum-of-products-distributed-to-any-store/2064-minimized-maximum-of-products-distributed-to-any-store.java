@@ -1,15 +1,17 @@
 class Solution {
  private boolean validmid(int n,int []quantities,int max){
     for(int ele: quantities){
-        
+
         n-=(ele+max-1)/max;
         if(n<0) return false;
     }
     return true;
  }
  public int minimizedMaximum(int n, int[] quantities) {
-  Arrays.sort(quantities);
-  int right=quantities[quantities.length-1];
+  int right = 0;
+  for (int q : quantities) {
+    right = Math.max(right, q);
+  }
   int left=1;
   int ans=0;
   while(left<=right){
