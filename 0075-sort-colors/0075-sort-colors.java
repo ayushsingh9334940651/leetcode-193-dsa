@@ -1,30 +1,25 @@
 class Solution {
-    public static void quicksoort(int arr[],int start,int end){
-        if(start>=end){
-            return;
-        }
-       int n= quicksoortidx(arr,start,end);
-        quicksoort(arr, start,n-1 );
-        quicksoort(arr, n+1, end);
-    }
-     public static int quicksoortidx(int arr[],int start,int end){
-            int target=arr[end];
-            int i=start-1;
-            for(int j=start;j<end;j++){
-                if(arr[j]<=target){
-                    i++;
-                   int temp = arr[i];
-                    arr[i] = arr[j];
-                    arr[j] = temp;  
-                }
-            }
-            i++;
-                   int temp = arr[i];
-                    arr[i] = arr[end];
-                    arr[end] = temp; 
-           return i;
-        }
     public void sortColors(int[] nums) {
-     quicksoort(nums,0,nums.length-1);
+     int zero=0;
+      int one=0;
+      int two=0;
+      for(int ele:nums){
+        if(ele==0) zero++;
+        else if(ele==1) one++;
+        else two++;
+      } 
+      int i=0;
+      while(zero>0){
+        nums[i++]=0;
+        zero--;
+      }
+      while(one>0){
+        nums[i++]=1;
+        one--;
+      }
+      while(two>0){
+        nums[i++]=2;
+        two--;
+      }
     }
 }
