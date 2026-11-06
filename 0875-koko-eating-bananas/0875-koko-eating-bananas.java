@@ -1,8 +1,11 @@
 class Solution {
-    private long check(int []nums,int val){
-      long sum=0;
-      for(int ele:nums) sum += (ele +(long)val - 1) / val;
-      return sum;
+    private boolean check(int []nums,int val,int h){
+       int sum=0;
+      for(int ele:nums) {
+        sum+=(ele+val-1)/val;
+        if(sum>h) return false;
+      }
+      return true;
     }
     public int minEatingSpeed(int[] piles, int h) {
          int max=piles[piles.length-1];
@@ -11,7 +14,7 @@ class Solution {
         int i=1; int j=max;
         while(i<=j){
          int mid=i+(j-i)/2;
-         if(check(piles,mid)<=h){
+         if(check(piles,mid,h)){
            ans=mid;
            j=mid-1;
          }else i=mid+1;
