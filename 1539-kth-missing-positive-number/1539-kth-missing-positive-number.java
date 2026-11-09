@@ -7,6 +7,6 @@ class Solution {
       if(miss<k) i=mid+1;
       else j=mid-1;
      }
-      return k+j+1;
+      return k+i; // arr[j]+remain(k-miss(arr[j]-(j+1)));
     }
 }
