@@ -8,7 +8,7 @@ class Solution {
            count++;
            ans=Math.max(ans,count);
          } 
-          if(s.charAt(i)==')') count--;
+          else if(s.charAt(i)==')') count--;
      }
      return ans;
     }
